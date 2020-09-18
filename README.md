@@ -1,6 +1,7 @@
 ![Issues](https://img.shields.io/github/issues/radon-h2020/radon-repositories-collector)
 ![pypi-version](https://img.shields.io/pypi/v/repositories-collector)
 ![pypi-status](https://img.shields.io/pypi/status/repositories-collector)
+![pypi-download](https://img.shields.io/pypi/dw/repository-scorer)
 ![python-version](https://img.shields.io/pypi/pyversions/repositories-collector)
 ![release-date](https://img.shields.io/github/release-date/radon-h2020/radon-repositories-collector)
 ![license](https://img.shields.io/pypi/l/repositories-collector)
