@@ -1,3 +1,10 @@
+![Issues](https://img.shields.io/github/issues/radon-h2020/radon-repositories-collector)
+![pypi-version](https://img.shields.io/pypi/v/repositories-collector)
+![pypi-status](https://img.shields.io/pypi/status/repositories-collector)
+![python-version](https://img.shields.io/pypi/pyversions/repositories-collector)
+![release-date](https://img.shields.io/github/release-date/radon-h2020/radon-repositories-collector)
+![license](https://img.shields.io/pypi/l/repositories-collector)
+
 # radon-repositories-collector
 A tool to query GraphQL for collecting repositories metadata.
 
@@ -68,3 +75,12 @@ You may want to avoid the previous step. If so, add ```GITHUB_ACCESS_TOKEN=<past
 
 ### Output
 Running the tool from command-line generates an HTML report accessible at *\<dest\>/report.html*.
+
+
+## Contributions
+
+To report bugs, visit the
+[issue tracker](https://github.com/radon-h2020/radon-repositories-collector/issues).
+
+In case you want to play with the source code or contribute improvements, see
+[CONTRIBUTING](#).
