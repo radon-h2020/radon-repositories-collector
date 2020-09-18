@@ -56,7 +56,7 @@ def valid_path(x: str) -> str:
 def get_parser():
     description = 'A Python library to collect repositories metadata from GitHub.'
 
-    parser = argparse.ArgumentParser(prog='radon-repositories-collector', description=description)
+    parser = argparse.ArgumentParser(prog='repositories-collector', description=description)
     parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + configuration.get('version', '0.0'))
 
     parser.add_argument(action='store',

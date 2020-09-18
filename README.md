@@ -15,7 +15,7 @@ pip install .
 ## Command-line usage
 
 ```
-usage: radon-repositories-collector [-h] [-v] [--from DATE_FROM]
+usage: repositories-collector [-h] [-v] [--from DATE_FROM]
                                     [--to DATE_TO] [--pushed-after DATE_PUSH]
                                     [--min-issues MIN_ISSUES]
                                     [--min-releases MIN_RELEASES]

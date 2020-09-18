@@ -14,7 +14,7 @@ with open("README.md", "r") as fh:
 
 VERSION = config.get("version", "0.0")
 
-setup(name='radon-repositories_collector',
+setup(name='repositories_collector',
       version=VERSION,
       description='A tool to query GraphQL for collecting repositories metadata.',
       long_description=long_description,
@@ -26,7 +26,7 @@ setup(name='radon-repositories_collector',
       download_url=f'https://github.com/radon-h2020/radon-repositories-collector/archive/{VERSION}.tar.gz',
       packages=find_packages(exclude=('tests',)),
       entry_points={
-          'console_scripts': ['radon-repositories-collector=collector.command_line:main'],
+          'console_scripts': ['repositories-collector=collector.command_line:main'],
       },
       classifiers=[
           "Development Status :: 3 - Alpha",
