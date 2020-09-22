@@ -1,19 +1,22 @@
 ![Issues](https://img.shields.io/github/issues/radon-h2020/radon-repositories-collector)
 ![pypi-version](https://img.shields.io/pypi/v/repositories-collector)
 ![pypi-status](https://img.shields.io/pypi/status/repositories-collector)
-![pypi-download](https://img.shields.io/pypi/dw/repository-scorer)
+![pypi-download](https://img.shields.io/pypi/dw/repositories-collector)
 ![python-version](https://img.shields.io/pypi/pyversions/repositories-collector)
 ![release-date](https://img.shields.io/github/release-date/radon-h2020/radon-repositories-collector)
 ![license](https://img.shields.io/pypi/l/repositories-collector)
 
 # radon-repositories-collector
-A tool to query GraphQL for collecting repositories metadata.
+A Python package to query GraphQL for collecting repositories metadata.
 
 
 ## How to install
 
-A PyPIP package will be available soon! 
-In the meantime, install it from source code with:
+The package can be downloaded from [PyPI](https://pypi.org/project/repositories-collector/) as follows:
+
+```pip install repositories-collector```
+
+Alternatively, it can be installed from the source code with:
 
 ```
 pip install -r requirements.txt
@@ -66,7 +69,7 @@ optional arguments:
 Once generated, paste the token in the input field when asked. For example:
 
 ```
-radon-repositories-collector . --from 2020-01-01 --to 2020-01-02
+repositories-collector . --from 2020-01-01 --to 2020-01-02
 
 Github access token: <paste your token here>
 ```  
