@@ -88,3 +88,7 @@ To report bugs, visit the
 
 In case you want to play with the source code or contribute improvements, see
 [CONTRIBUTING](#).
+
+## Version
+**[0.0.2]** 
+Fixed missed import of config.json in MANIFEST.in
