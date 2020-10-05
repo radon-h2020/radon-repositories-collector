@@ -5,6 +5,7 @@
 ![python-version](https://img.shields.io/pypi/pyversions/repositories-collector)
 ![release-date](https://img.shields.io/github/release-date/radon-h2020/radon-repositories-collector)
 ![license](https://img.shields.io/pypi/l/repositories-collector)
+![lgtm](https://img.shields.io/lgtm/grade/python/github/radon-h2020/radon-repositories-collector)
 
 # radon-repositories-collector
 A Python package to query GraphQL for collecting repositories metadata.
