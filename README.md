@@ -1,11 +1,10 @@
-![Issues](https://img.shields.io/github/issues/radon-h2020/radon-repositories-collector)
+![lgtm](https://img.shields.io/lgtm/grade/python/github/radon-h2020/radon-repositories-collector)
+![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/radon-h2020/radon-repositories-collector)
 ![pypi-version](https://img.shields.io/pypi/v/repositories-collector)
 ![pypi-status](https://img.shields.io/pypi/status/repositories-collector)
-![pypi-download](https://img.shields.io/pypi/dw/repositories-collector)
-![python-version](https://img.shields.io/pypi/pyversions/repositories-collector)
 ![release-date](https://img.shields.io/github/release-date/radon-h2020/radon-repositories-collector)
-![license](https://img.shields.io/pypi/l/repositories-collector)
-![lgtm](https://img.shields.io/lgtm/grade/python/github/radon-h2020/radon-repositories-collector)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 
 # radon-repositories-collector
 A Python package to query GraphQL for collecting repositories metadata.
