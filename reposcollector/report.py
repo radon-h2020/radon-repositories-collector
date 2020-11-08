@@ -126,7 +126,7 @@ def __generate_card(metadata: dict) -> str:
                 </div>
             </div>
         </div>
-        """.format(metadata.get('id').replace('=', '_'),
+        """.format(metadata.get('id'),
                    metadata.get('owner'),
                    metadata.get('name'),
                    metadata.get('url'),

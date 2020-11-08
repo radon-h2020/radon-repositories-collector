@@ -5,14 +5,13 @@ import json
 import os
 
 from datetime import datetime
-from dotenv import load_dotenv
 from getpass import getpass
 
-from collector.github import GithubRepositoriesCollector
-from collector.report import create_report
+from reposcollector.github import GithubRepositoriesCollector
+from reposcollector.report import create_report
 
-with open('config.json', 'r') as in_stream:
-    configuration = json.load(in_stream)
+VERSION = "0.0.3"
+
 
 def date(x: str) -> datetime:
     """
@@ -56,27 +55,25 @@ def valid_path(x: str) -> str:
 def get_parser():
     description = 'A Python library to collect repositories metadata from GitHub.'
 
-    parser = argparse.ArgumentParser(prog='repositories-collector', description=description)
-    parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + configuration.get('version', '0.0'))
+    parser = argparse.ArgumentParser(prog='repositories-reposcollector', description=description)
+    parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + VERSION)
+
+    parser.add_argument(action='store',
+                        dest='since',
+                        type=date,
+                        default=datetime.strptime('2014-01-01', '%Y-%m-%d'),
+                        help='collect repositories created since this date (default: %(default)s)')
+
+    parser.add_argument(action='store',
+                        dest='until',
+                        type=date,
+                        default=datetime.strptime('2014-01-01', '%Y-%m-%d'),
+                        help='collect repositories created up to this date (default: %(default)s)')
 
     parser.add_argument(action='store',
                         dest='dest',
                         type=valid_path,
                         help='destination folder for report')
-
-    parser.add_argument('--from',
-                        action='store',
-                        dest='date_from',
-                        type=date,
-                        default=datetime.strptime('2014-01-01', '%Y-%m-%d'),
-                        help='collect repositories created since this date (default: %(default)s)')
-
-    parser.add_argument('--to',
-                        action='store',
-                        dest='date_to',
-                        type=date,
-                        default=datetime.strptime('2014-01-01', '%Y-%m-%d'),
-                        help='collect repositories created up to this date (default: %(default)s)')
 
     parser.add_argument('--pushed-after',
                         action='store',
@@ -122,11 +119,8 @@ def get_parser():
     return parser
 
 
-
 def main():
     args = get_parser().parse_args()
-
-    load_dotenv()
 
     token = os.getenv('GITHUB_ACCESS_TOKEN')
     if not token:
@@ -134,8 +128,8 @@ def main():
 
     github = GithubRepositoriesCollector(
         access_token=token,
-        date_from=args.date_from,
-        date_to=args.date_to,
+        since=args.since,
+        until=args.until,
         pushed_after=args.date_push,
         min_stars=args.min_stars,
         min_releases=args.min_releases,
@@ -146,23 +140,24 @@ def main():
     repositories = list()
     for repository in github.collect_repositories():
 
-        if args.verbose:
-            print(f'Collecting {repository["url"]} ... ', end='', flush=True)
-
         # Save repository to collection
         repositories.append(copy.deepcopy(repository))
 
         if args.verbose:
-            print('DONE')
+            print(f'Collected {repository["url"]}')
 
     # Generate html report
     html = create_report(repositories)
-    filename = os.path.join(args.dest, 'report.html')
+    html_filename = os.path.join(args.dest, 'repositories.html')
+    json_filename = os.path.join(args.dest, 'repositories.json')
 
-    with io.open(filename, "w", encoding="utf-8") as f:
+    with io.open(html_filename, "w", encoding="utf-8") as f:
         f.write(html)
 
+    with io.open(json_filename, "w") as f:
+        json.dump(repositories, f)
+
     if args.verbose:
-        print(f'Report created at {filename}')
+        print(f'Report created at {html_filename}')
 
     exit(0)

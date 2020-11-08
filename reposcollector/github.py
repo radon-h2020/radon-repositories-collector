@@ -6,9 +6,9 @@ import re
 import requests
 from datetime import datetime
 
-QUERY = """{ search(query: "is:public stars:>=MIN_STARS mirror:false archived:false created:DATE_FROM..DATE_TO 
+QUERY = """{ search(query: "is:public stars:>=MIN_STARS mirror:false archived:false created:SINCE..UNTIL 
 pushed:>=PUSHED_AFTER", type: REPOSITORY, first: 50 AFTER) { repositoryCount pageInfo { endCursor startCursor 
-hasNextPage } edges { node { ... on Repository { id defaultBranchRef { name } owner { login } name url description 
+hasNextPage } edges { node { ... on Repository { databaseId defaultBranchRef { name } owner { login } name url description 
 primaryLanguage { name } stargazers { totalCount } watchers { totalCount } releases { totalCount } issues { 
 totalCount } createdAt pushedAt updatedAt hasIssuesEnabled isArchived isDisabled isMirror isFork object(expression: 
 "master:") { ... on Tree { entries { name type } } } } } } } 
@@ -27,8 +27,8 @@ class GithubRepositoriesCollector:
 
     def __init__(self,
                  access_token,
-                 date_from: datetime,
-                 date_to: datetime,
+                 since: datetime,
+                 until: datetime,
                  pushed_after: datetime,
                  min_stars: int = 0,
                  min_releases: int = 0,
@@ -39,8 +39,8 @@ class GithubRepositoriesCollector:
         Crawl GitHub to extract repositories
 
         :param access_token: the token to query GraphQL (https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)
-        :param date_from: search for repositories created from date_from
-        :param date_to: search for repositories created up to date_to
+        :param since: search for repositories created from since
+        :param until: search for repositories created up to until
         :param pushed_after: datetime to filter out repositories. Repositories older than pushed_after are ignored.
         :param min_stars: the minimum number of stars the repositories must have
         :param min_releases: the minimum number of releases the repositories must have
@@ -52,8 +52,8 @@ class GithubRepositoriesCollector:
         self._quota = 0
         self._quota_reset_at = None
 
-        self.date_from = date_from.strftime('%Y-%m-%dT%H:%M:%SZ')
-        self.date_to = date_to.strftime('%Y-%m-%dT%H:%M:%SZ')
+        self.since = since.strftime('%Y-%m-%dT%H:%M:%SZ')
+        self.until = until.strftime('%Y-%m-%dT%H:%M:%SZ')
         self.pushed_after = pushed_after.strftime('%Y-%m-%dT%H:%M:%SZ')
         self.min_stars = min_stars
         self.min_releases = min_releases
@@ -61,8 +61,8 @@ class GithubRepositoriesCollector:
         self.min_issues = min_issues
 
         self.query = re.sub('MIN_STARS', str(self.min_stars), QUERY)
-        self.query = re.sub('DATE_FROM', str(self.date_from), self.query)
-        self.query = re.sub('DATE_TO', str(self.date_to), self.query)
+        self.query = re.sub('SINCE', str(self.since), self.query)
+        self.query = re.sub('UNTIL', str(self.until), self.query)
         self.query = re.sub('PUSHED_AFTER', self.pushed_after, self.query)
 
     @property
@@ -131,7 +131,7 @@ class GithubRepositoriesCollector:
             dirs = [entry.get('name') for entry in object.get('entries', []) if entry.get('type') == 'tree']
 
             yield dict(
-                id=node.get('id'),
+                id=node.get('databaseId'),
                 default_branch=node.get('defaultBranchRef', {}).get('name'),
                 owner=node.get('owner', {}).get('login', ''),
                 name=node.get('name', ''),

@@ -1,10 +1,6 @@
 #!/usr/bin/env python
 
-import json
 from setuptools import setup, find_packages
-
-with open("config.json", "r") as fh:
-    config = json.load(fh)
 
 with open("requirements.txt", "r") as reqs_file:
     requirements = reqs_file.read().splitlines()
@@ -12,7 +8,7 @@ with open("requirements.txt", "r") as reqs_file:
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-VERSION = config.get("version", "0.0")
+VERSION = "0.0.3"
 
 setup(name='repositories_collector',
       version=VERSION,
@@ -26,7 +22,7 @@ setup(name='repositories_collector',
       download_url=f'https://github.com/radon-h2020/radon-repositories-collector/archive/{VERSION}.tar.gz',
       packages=find_packages(exclude=('tests',)),
       entry_points={
-          'console_scripts': ['repositories-collector=collector.command_line:main'],
+          'console_scripts': ['repositories-collector=reposcollector.cli:main'],
       },
       classifiers=[
           "Development Status :: 3 - Alpha",
