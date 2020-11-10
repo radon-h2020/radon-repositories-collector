@@ -66,15 +66,7 @@ optional arguments:
 
 
 **Important!** The tool requires a personal access token to access the GraphQL APIs. See how to get one [here](https://github.com/settings/tokens).
-Once generated, paste the token in the input field when asked. For example:
-
-```
-repositories-collector . --from 2020-01-01 --to 2020-01-02
-
-Github access token: <paste your token here>
-```  
-
-You may want to avoid the previous step. If so, add ```GITHUB_ACCESS_TOKEN=<paste here your token>``` to the environment variables.
+Add ```GITHUB_ACCESS_TOKEN=<paste here your token>``` to the environment variables.
 
 
 ### Output
