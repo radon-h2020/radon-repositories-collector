@@ -22,7 +22,7 @@ setup(name='repositories_collector',
       download_url=f'https://github.com/radon-h2020/radon-repositories-collector/archive/{VERSION}.tar.gz',
       packages=find_packages(exclude=('tests',)),
       entry_points={
-          'console_scripts': ['repositories-collector=reposcollector.cli:main'],
+          'console_scripts': ['repositories-collector=repocollector.cli:main'],
       },
       classifiers=[
           "Development Status :: 3 - Alpha",

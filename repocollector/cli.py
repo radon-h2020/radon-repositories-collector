@@ -7,8 +7,8 @@ import os
 from datetime import datetime
 from getpass import getpass
 
-from reposcollector.github import GithubRepositoriesCollector
-from reposcollector.report import create_report
+from repocollector.github import GithubRepositoriesCollector
+from repocollector.report import create_report
 
 VERSION = "0.0.3"
 
@@ -55,7 +55,7 @@ def valid_path(x: str) -> str:
 def get_parser():
     description = 'A Python library to collect repositories metadata from GitHub.'
 
-    parser = argparse.ArgumentParser(prog='repositories-reposcollector', description=description)
+    parser = argparse.ArgumentParser(prog='repositories-repocollector', description=description)
     parser.add_argument('-v', '--version', action='version', version='%(prog)s ' + VERSION)
 
     parser.add_argument(action='store',
