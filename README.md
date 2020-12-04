@@ -10,6 +10,40 @@
 A Python package to query GraphQL for collecting repositories metadata.
 
 
+```python
+import os
+from datetime import datetime
+from repocollector import GithubRepositoriesCollector
+
+github_crawler = GithubRepositoriesCollector(
+                access_token=os.getenv('GITHUB_ACCESS_TOKEN'),  # or paste your token
+                since=datetime(2019, 12, 31),
+                until=datetime(2020, 12, 31),
+                pushed_after=datetime(2020, 6, 1),
+                min_issues=0,
+                min_releases=0,
+                min_stars=0,
+                min_watchers=0)
+
+for repo in github_crawler.collect_repositories():
+    print('id:', repo['id']) # e.g., 123456
+    print('default_branch:', repo['default_branch']) # e.g., main
+    print('owner:', repo['owner']) # e.g., radon-h2020
+    print('name:', repo['name']) # e.g., radon-repositories-collector
+    print('url:', repo['url'])
+    print('description:', repo['description'])
+    print('issues:', repo['issues'])
+    print('releases:', repo['releases'])
+    print('stars:', repo['stars'])
+    print('watchers:', repo['watchers'])
+    print('primary_language:', repo['primary_language'])
+    print('created_at:', repo['created_at'])
+    print('pushed_at:', repo['pushed_at'])
+    print('dirs:', repo['dirs']) # list of repo's root directories, e.g., [repocollector]
+```
+
+
+
 ## How to install
 
 The package can be downloaded from [PyPI](https://pypi.org/project/repositories-collector/) as follows:
