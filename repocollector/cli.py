@@ -110,6 +110,13 @@ def get_parser():
                         default=0,
                         help='collect repositories with at least <min-watchers> watchers (default: %(default)s)')
 
+    parser.add_argument('--primary-language',
+                        action='store',
+                        dest='primary_language',
+                        type=str,
+                        default=None,
+                        help='collect repositories written in this language')
+
     parser.add_argument('--verbose',
                         action='store_true',
                         dest='verbose',
@@ -134,7 +141,8 @@ def main():
         min_stars=args.min_stars,
         min_releases=args.min_releases,
         min_watchers=args.min_watchers,
-        min_issues=args.min_issues
+        min_issues=args.min_issues,
+        primary_language=args.primary_language
     )
 
     repositories = list()

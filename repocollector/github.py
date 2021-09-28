@@ -7,7 +7,7 @@ import requests
 from datetime import datetime
 
 QUERY = """{ search(query: "is:public stars:>=MIN_STARS mirror:false archived:false created:SINCE..UNTIL 
-pushed:>=PUSHED_AFTER", type: REPOSITORY, first: 50 AFTER) { repositoryCount pageInfo { endCursor startCursor 
+pushed:>=PUSHED_AFTER LANGUAGE:LANGUAGE", type: REPOSITORY, first: 50 AFTER) { repositoryCount pageInfo { endCursor startCursor 
 hasNextPage } edges { node { ... on Repository { databaseId defaultBranchRef { name } owner { login } name url description 
 primaryLanguage { name } stargazers { totalCount } watchers { totalCount } releases { totalCount } issues { 
 totalCount } createdAt pushedAt updatedAt hasIssuesEnabled isArchived isDisabled isMirror isFork object(expression: 
@@ -33,8 +33,8 @@ class GithubRepositoriesCollector:
                  min_stars: int = 0,
                  min_releases: int = 0,
                  min_watchers: int = 0,
-                 min_issues: int = 0
-                 ):
+                 min_issues: int = 0,
+                 primary_language: str = None):
         """
         Crawl GitHub to extract repositories
 
@@ -46,6 +46,7 @@ class GithubRepositoriesCollector:
         :param min_releases: the minimum number of releases the repositories must have
         :param min_watchers: the minimum number of watchers the repositories must have
         :param min_issues: the minimum number of issues the repositories must have
+        :param primary_language: get repositories written in this language
         """
 
         self._token = access_token
@@ -64,6 +65,11 @@ class GithubRepositoriesCollector:
         self.query = re.sub('SINCE', str(self.since), self.query)
         self.query = re.sub('UNTIL', str(self.until), self.query)
         self.query = re.sub('PUSHED_AFTER', self.pushed_after, self.query)
+
+        if primary_language:
+            self.query = re.sub('LANGUAGE:LANGUAGE', f'language:{primary_language}', self.query)
+        else:
+            self.query = re.sub('LANGUAGE:LANGUAGE', '', self.query)
 
     @property
     def quota(self):

@@ -8,7 +8,7 @@ with open("requirements.txt", "r") as reqs_file:
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-VERSION = "0.0.3"
+VERSION = "0.0.4"
 
 setup(name='repositories_collector',
       version=VERSION,
@@ -25,12 +25,12 @@ setup(name='repositories_collector',
           'console_scripts': ['repositories-collector=repocollector.cli:main'],
       },
       classifiers=[
-          "Development Status :: 3 - Alpha",
+          "Development Status :: 5 - Production/Stable",
           "Intended Audience :: Developers",
           "Programming Language :: Python :: 3.7",
           "License :: OSI Approved :: Apache Software License",
           "Topic :: Software Development :: Libraries :: Python Modules",
           "Operating System :: OS Independent"
       ],
-      insall_requires=requirements
+      install_requires=requirements
 )

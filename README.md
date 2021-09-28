@@ -17,7 +17,7 @@ The package can be installed from [PyPI](https://pypi.org/project/repositories-c
 ```python
 import os
 from datetime import datetime
-from repocollector import GithubRepositoriesCollector
+from repocollector.github import GithubRepositoriesCollector
 
 github_crawler = GithubRepositoriesCollector(
                 access_token=os.getenv('GITHUB_ACCESS_TOKEN'),  # or paste your token
@@ -27,7 +27,8 @@ github_crawler = GithubRepositoriesCollector(
                 min_issues=0,
                 min_releases=0,
                 min_stars=0,
-                min_watchers=0)
+                min_watchers=0,
+                primary_language='language') # e.g., python
 
 for repo in github_crawler.collect_repositories():
     print('id:', repo['id']) # e.g., 123456
@@ -88,6 +89,8 @@ optional arguments:
   --min-watchers MIN_WATCHERS
                         collect repositories with at least <min-watchers>
                         watchers (default: 0)
+  --primary-language LANGUAGE
+                        collect repositories written in this language
   --verbose             show log (default: False)
 ```
 
@@ -95,9 +98,19 @@ optional arguments:
 **Important!** The tool requires a personal access token to access the GraphQL APIs. See how to get one [here](https://github.com/settings/tokens).
 Add ```GITHUB_ACCESS_TOKEN=<paste here your token>``` to the environment variables.
 
-
-### Output
+**Output**
 Running the tool from command-line generates an HTML report accessible at *\<dest\>/report.html*.
+
+**Example**
+The following command search for repositories written in python created between 2014-02-01 and 2014-02-03. 
+The report is saved in the folder /tmp/
+
+```
+repositories-collector 2014-02-01 2014-02-03 /tmp/ --primary-language python
+```
+
+
+
 
 
 ## Contributions
