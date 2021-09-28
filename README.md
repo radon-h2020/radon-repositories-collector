@@ -1,14 +1,18 @@
+# radon-repositories-collector
+A Python package to query GraphQL for collecting GitHub repositories metadata.
+
 ![lgtm](https://img.shields.io/lgtm/grade/python/github/radon-h2020/radon-repositories-collector)
-![LGTM Alerts](https://img.shields.io/lgtm/alerts/github/radon-h2020/radon-repositories-collector)
 ![pypi-version](https://img.shields.io/pypi/v/repositories-collector)
-![pypi-status](https://img.shields.io/pypi/status/repositories-collector)
-![release-date](https://img.shields.io/github/release-date/radon-h2020/radon-repositories-collector)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
-# radon-repositories-collector
-A Python package to query GraphQL for collecting repositories metadata.
+## Install
 
+The package can be installed from [PyPI](https://pypi.org/project/repositories-collector/) as follows:
+
+```pip install repositories-collector```
+
+## Python usage
 
 ```python
 import os
@@ -44,18 +48,7 @@ for repo in github_crawler.collect_repositories():
 
 
 
-## How to install
 
-The package can be downloaded from [PyPI](https://pypi.org/project/repositories-collector/) as follows:
-
-```pip install repositories-collector```
-
-Alternatively, it can be installed from the source code with:
-
-```
-pip install -r requirements.txt
-pip install .
-```
 
 ## Command-line usage
 
