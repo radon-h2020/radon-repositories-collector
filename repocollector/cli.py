@@ -10,7 +10,7 @@ from getpass import getpass
 from repocollector.github import GithubRepositoriesCollector
 from repocollector.report import create_report
 
-VERSION = "0.0.3"
+VERSION = "0.0.5"
 
 
 def date(x: str) -> datetime:
@@ -79,7 +79,7 @@ def get_parser():
                         action='store',
                         dest='date_push',
                         type=date,
-                        default=datetime.strptime('2019-01-01', '%Y-%m-%d'),
+                        default=datetime.strptime('2014-01-01', '%Y-%m-%d'),
                         help='collect only repositories pushed after this date (default: %(default)s)')
 
     parser.add_argument('--min-issues',
@@ -133,20 +133,18 @@ def main():
     if not token:
         token = getpass('Github access token:')
 
-    github = GithubRepositoriesCollector(
-        access_token=token,
-        since=args.since,
-        until=args.until,
-        pushed_after=args.date_push,
-        min_stars=args.min_stars,
-        min_releases=args.min_releases,
-        min_watchers=args.min_watchers,
-        min_issues=args.min_issues,
-        primary_language=args.primary_language
-    )
+    github = GithubRepositoriesCollector(access_token=token)
 
     repositories = list()
-    for repository in github.collect_repositories():
+    for repository in github.collect_repositories(
+            since=args.since,
+            until=args.until,
+            pushed_after=args.date_push,
+            min_stars=args.min_stars,
+            min_releases=args.min_releases,
+            min_watchers=args.min_watchers,
+            min_issues=args.min_issues,
+            primary_language=args.primary_language):
 
         # Save repository to collection
         repositories.append(copy.deepcopy(repository))

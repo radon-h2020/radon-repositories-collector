@@ -8,7 +8,7 @@ with open("requirements.txt", "r") as reqs_file:
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
-VERSION = "0.0.4"
+VERSION = "0.0.5"
 
 setup(name='repositories_collector',
       version=VERSION,
