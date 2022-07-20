@@ -90,7 +90,9 @@ Running the tool from command-line generates a JSON and HTML report accessible a
 **Example**
 The following command searches for repositories written in python created between 31 Dec 2019 and 31 Dec 2020 with at least one commit after 1 Jun 2020 (i.e.,pushed after):
 
-`repositories-collector 2019-12-31 2020-12-31 /tmp/ --pushed_after 2020-06-01 --min_issues 0 --min_releases 0 --min_stars 0 --min_watchers 0 --primary_language python`
+```
+repositories-collector 2019-12-31 2020-12-31 /tmp/ --pushed_after 2020-06-01 --min_issues 0 --min_releases 0 --min_stars 0 --min_watchers 0 --primary_language python
+```
 
 The report is saved at `/tmp/repositories.html` and `/tmp/repositories.json`.
 
