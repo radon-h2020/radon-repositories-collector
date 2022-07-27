@@ -95,8 +95,6 @@ class GithubRepositoriesCollector:
             owner = node.get('owner', {}).get('login', '')
             name = node.get('name', '')
 
-            print(node)
-
             yield dict(
                 id=node.get('databaseId'),
                 default_branch=node.get('defaultBranchRef', {}).get('name'),
