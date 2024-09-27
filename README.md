@@ -1,8 +1,8 @@
 # radon-repositories-collector
 A Python package to query GraphQL for collecting GitHub repositories metadata.
 
-![lgtm](https://img.shields.io/lgtm/grade/python/github/radon-h2020/radon-repositories-collector)
 ![pypi-version](https://img.shields.io/pypi/v/repositories-collector)
+[![Downloads](https://pepy.tech/badge/repositories-collector/month)](https://pepy.tech/project/repositories-collector)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 
