@@ -1,12 +1,11 @@
 # radon-repositories-collector
-A Python package to query GraphQL for collecting GitHub repositories metadata.
-
 ![pypi-version](https://img.shields.io/pypi/v/repositories-collector)
 [![Downloads](https://pepy.tech/badge/repositories-collector/month)](https://pepy.tech/project/repositories-collector)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
+Python package to query GraphQL for collecting metadata of GitHub repositories that meet the specified filters.
 
-Note, the tool requires a personal access token to access the GraphQL APIs. 
+**Note**: you need a personal access token to access the GraphQL APIs. 
 See how to get one [here](https://github.com/settings/tokens).
 
 ## Install
@@ -18,7 +17,6 @@ The package can be installed from [PyPI](https://pypi.org/project/repositories-c
 ## Python usage
 
 ```python
-import os
 from datetime import datetime
 from repocollector.github import GithubRepositoriesCollector
 
@@ -27,12 +25,12 @@ github_crawler = GithubRepositoriesCollector('<GITHUB ACCESS TOKEN>')
 for repo in github_crawler.collect_repositories(
                 since=datetime(2019, 12, 31),
                 until=datetime(2020, 12, 31),
-                pushed_after=datetime(2020, 6, 1),
+                pushed_after=datetime(2020, 6, 1), # Committed after
                 min_issues=0,
                 min_releases=0,
                 min_stars=0,
                 min_watchers=0,
-                primary_language='<language>'):
+                primary_language='<language>'): # "python", "java", etc.
 
     print('id:', repo['id']) # e.g., 123456
     print('default_branch:', repo['default_branch']) # e.g., main
